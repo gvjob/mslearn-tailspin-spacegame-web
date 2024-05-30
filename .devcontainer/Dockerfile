@@ -32,7 +32,9 @@ ARG AGENT_VERSION="2.206.1"
 RUN cd /home/vscode/azure-pipelines \
     && curl -O -L https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-${ARCH}-${AGENT_VERSION}.tar.gz \
     && tar xzf /home/vscode/azure-pipelines/vsts-agent-linux-${ARCH}-${AGENT_VERSION}.tar.gz \
-    && /home/vscode/azure-pipelines/bin/installdependencies.sh
+    && /tmp/library-scripts/installdependencies_gv1.sh
+# replaced by line above: use a different version of installdependencies script to circumvent issues with liblttng-ust not being found     
+#    && /home/vscode/azure-pipelines/bin/installdependencies.sh
 
 # copy over the start.sh script
 COPY library-scripts/start.sh /home/vscode/azure-pipelines/start.sh
